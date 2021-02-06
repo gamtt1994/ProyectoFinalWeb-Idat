@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router";
+
+import firebase, { FirebaseContext } from "./firebase";
+
+import Ordenes from "./components/paginas/Ordenes";
+import OrdenesCompletados from "./components/paginas/OrdenesCompletados";
+import Menu from "./components/paginas/Menu";
+import Personal from "./components/paginas/Personal";
+import NuevoProducto from "./components/paginas/NuevoProducto";
+import NuevoPersonal from "./components/paginas/NuevoPersonal";
+import Sidebar from "./components/ui/Sidebar";
+import Login from "./components/paginas/login";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FirebaseContext.Provider
+      value={{
+        firebase,
+      }}
+    >
+      <div className="md:w-4/5 xl:w-full ">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/ordenes" element={<Ordenes />} />
+          <Route path="/ordenescompletados" element={<OrdenesCompletados />} />
+          <Route path="/producto" element={<Menu />} />
+          <Route path="/personal" element={<Personal />} />
+          <Route path="/nuevo-producto" element={<NuevoProducto />} />
+          <Route path="/nuevo-personal" element={<NuevoPersonal />} />
+        </Routes>
+      </div>
+    </FirebaseContext.Provider>
   );
 }
 
